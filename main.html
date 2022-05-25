@@ -8,13 +8,64 @@
   </head>
   <body>
     <script>
+      //Computer Selection
+
+      const values = ["rock", "paper", "scissors"];
+
       function computerPlay() {
-        let values = ["rock", "paper", "scissors"],
-          compChoice = values[Math.floor(Math.random() * values.length)];
-        console.log(compChoice);
+        return values[Math.floor(Math.random() * values.length)];
       }
-      function playGame() {
-        let playerSelection = document.getElementById().value;
+      let playerSelection;
+      let compSelection;
+
+      function playRound(playerSelection, compSelection) {
+        computerPlay();
+
+        compSelection = computerPlay();
+        playerSelection = prompt("Please enter your move:");
+        playerSelection = playerSelection.toLowerCase();
+
+        //Tie
+        if (playerSelection === compSelection) {
+          return alert("It's a tie!");
+        }
+
+        //Rock
+        if (playerSelection === "rock") {
+          if (compSelection === "scissors") {
+            return alert(
+              `You WIN - ${playerSelection} beats ${compSelection}!`
+            );
+          } else {
+            return alert(
+              `Better luck next time... ${compSelection} beats ${playerSelection}!`
+            );
+          }
+        }
+        //Paper
+        if (playerSelection === "paper") {
+          if (compSelection === "rock") {
+            return alert(
+              `You WIN - ${playerSelection} beats ${compSelection}!`
+            );
+          } else {
+            return alert(
+              `Better luck next time... ${compSelection} beats ${playerSelection}!`
+            );
+          }
+        }
+        //Scissors
+        if (playerSelection === "scissors") {
+          if (compSelection === "paper") {
+            return alert(
+              `You WIN - ${playerSelection} beats ${compSelection}!`
+            );
+          } else {
+            return alert(
+              `Better luck next time... ${compSelection} beats ${playerSelection}!`
+            );
+          }
+        }
       }
     </script>
   </body>
