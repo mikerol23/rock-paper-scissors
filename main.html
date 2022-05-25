@@ -8,16 +8,18 @@
   </head>
   <body>
     <script>
-      //Computer Selection
-
+      //Variables
       const values = ["rock", "paper", "scissors"];
+      let playerSelection;
+      let compSelection;
+      let compScore = 0;
+      let playerScore = 0;
 
+      //Computer Selection
       function computerPlay() {
         return values[Math.floor(Math.random() * values.length)];
       }
-      let playerSelection;
-      let compSelection;
-
+      //Gameplay//
       function playRound(playerSelection, compSelection) {
         computerPlay();
 
@@ -36,10 +38,12 @@
             return alert(
               `You WIN - ${playerSelection} beats ${compSelection}!`
             );
+            playerWin();
           } else {
             return alert(
               `Better luck next time... ${compSelection} beats ${playerSelection}!`
             );
+            compWin();
           }
         }
         //Paper
@@ -48,10 +52,12 @@
             return alert(
               `You WIN - ${playerSelection} beats ${compSelection}!`
             );
+            playerWin();
           } else {
             return alert(
               `Better luck next time... ${compSelection} beats ${playerSelection}!`
             );
+            compWin();
           }
         }
         //Scissors
@@ -60,11 +66,28 @@
             return alert(
               `You WIN - ${playerSelection} beats ${compSelection}!`
             );
+            playerWin();
           } else {
             return alert(
               `Better luck next time... ${compSelection} beats ${playerSelection}!`
             );
+            compWin();
           }
+        }
+      }
+      function compWin() {
+        compScore += 1;
+      }
+      function playerWin() {
+        playerScore += 1;
+      }
+      function game() {
+        //plays 5 games in a row and tallies score//
+
+        for (let i = 0; i < 5; i++) {
+          playRound();
+          console.log(`Computer Score: ${compScore}`);
+          console.log(`Your Score: ${playerScore}`);
         }
       }
     </script>
