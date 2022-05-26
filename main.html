@@ -40,55 +40,51 @@
             );
             playerWin();
           } else {
-            return alert(
-              `Better luck next time... ${compSelection} beats ${playerSelection}!`
-            );
             compWin();
           }
         }
         //Paper
         if (playerSelection === "paper") {
           if (compSelection === "rock") {
-            return alert(
-              `You WIN - ${playerSelection} beats ${compSelection}!`
-            );
             playerWin();
           } else {
-            return alert(
-              `Better luck next time... ${compSelection} beats ${playerSelection}!`
-            );
             compWin();
           }
         }
         //Scissors
         if (playerSelection === "scissors") {
           if (compSelection === "paper") {
-            return alert(
-              `You WIN - ${playerSelection} beats ${compSelection}!`
-            );
             playerWin();
           } else {
-            return alert(
-              `Better luck next time... ${compSelection} beats ${playerSelection}!`
-            );
             compWin();
           }
         }
+        function compWin() {
+          compScore += 1;
+          console.log("Maybe next time...");
+          return alert(
+            `Better luck next time... ${compSelection} beats ${playerSelection}!`
+          );
+        }
+        function playerWin() {
+          playerScore += 1;
+          console.log("Winner!");
+          return alert(`You WIN - ${playerSelection} beats ${compSelection}!`);
+        }
       }
-      function compWin() {
-        compScore += 1;
-      }
-      function playerWin() {
-        playerScore += 1;
-      }
+
       function game() {
         //plays 5 games in a row and tallies score//
-
         for (let i = 0; i < 5; i++) {
           playRound();
           console.log(`Computer Score: ${compScore}`);
           console.log(`Your Score: ${playerScore}`);
         }
+        console.log(
+          `||FINAL SCORE||
+YOU: ${playerScore}
+COMPUTER: ${compScore}`
+        );
       }
     </script>
   </body>
