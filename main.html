@@ -38,7 +38,6 @@
     </div>
 
     <script>
-      //Variables
       let compScore = 0;
       let playerScore = 0;
 
@@ -95,32 +94,6 @@
           }
         }
 
-        // //Rock
-        // if (playerMove === "rock") {
-        //   if (compMove === "scissors") {
-        //     // console.log(`You WIN - ${playerMove} beats ${compMove}!`);
-        //     playerWin();
-        //   } else {
-        //     compWin();
-        //   }
-        // }
-        // //Paper
-        // if (playerMove === "paper") {
-        //   if (compMove === "rock") {
-        //     playerWin();
-        //   } else {
-        //     compWin();
-        //   }
-        // }
-        // //Scissors
-        // if (playerMove === "scissors") {
-        //   if (compMove === "paper") {
-        //     playerWin();
-        //   } else {
-        //     compWin();
-        //   }
-        // }
-
         function compWin() {
           compScore += 1;
           if (compScore === 5) {
@@ -130,10 +103,6 @@
             document.getElementById("result").textContent =
               "Better luck next time...";
           }
-          // console.log("Maybe next time...");
-          // console.log(
-          //   `Better luck next time... ${compMove} beats ${playerMove}!`
-          // );
         }
         function playerWin() {
           playerScore += 1;
@@ -143,24 +112,14 @@
           } else {
             document.getElementById("result").textContent = "Winner!";
           }
-
-          // console.log("Winner!");
-          // console.log(`You WIN - ${playerMove} beats ${compMove}!`);
         }
-        //Tie
+
         function tie() {
           document.getElementById("result").textContent =
             "It's a tie! The scores remain...";
-          // console.log("It's a tie! The scores remain...");
         }
         document.getElementById("player-score").textContent = `${playerScore}`;
         document.getElementById("comp-score").textContent = `${compScore}`;
-      }
-
-      function game() {
-        playRound();
-        console.log(`Computer Score: ${compScore}`);
-        console.log(`Your Score: ${playerScore}`);
       }
     </script>
   </body>
