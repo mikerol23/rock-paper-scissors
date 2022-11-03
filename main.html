@@ -7,84 +7,160 @@
     <title>Document</title>
   </head>
   <body>
+    <div id="container">
+      <button id="rock" class="btn">Rock</button>
+      <button id="paper" class="btn">Paper</button>
+      <button id="scissors" class="btn">Scissors</button>
+    </div>
+    <div>
+      <h2 id="result">Rock Paper Scissors</h2>
+      <h3>Moves</h3>
+      <h4>
+        You:
+        <div id="player-move"></div>
+      </h4>
+
+      <h4>
+        Computer:
+        <div id="comp-move"></div>
+      </h4>
+    </div>
+    <div>
+      <h3>Score</h3>
+      <h4>
+        You:
+        <div id="player-score">0</div>
+      </h4>
+      <h4>
+        Computer:
+        <div id="comp-score">0</div>
+      </h4>
+    </div>
+
     <script>
       //Variables
-      const values = ["rock", "paper", "scissors"];
-      let playerSelection;
-      let compSelection;
       let compScore = 0;
       let playerScore = 0;
 
-      //Computer Selection
-      function computerPlay() {
-        return values[Math.floor(Math.random() * values.length)];
-      }
-      //Gameplay//
-      function playRound(playerSelection, compSelection) {
-        computerPlay();
+      const moves = ["rock", "paper", "scissors"];
 
-        compSelection = computerPlay();
-        playerSelection = prompt("Please enter your move:");
-        playerSelection = playerSelection.toLowerCase();
+      const buttons = document.querySelectorAll("button");
+      buttons.forEach((button) => {
+        button.addEventListener("click", playRound);
+      });
 
-        //Tie
-        if (playerSelection === compSelection) {
-          return alert("It's a tie!");
+      function playRound(playerMove, compMove) {
+        function compChoice() {
+          return moves[Math.floor(Math.random() * moves.length)];
         }
 
-        //Rock
-        if (playerSelection === "rock") {
-          if (compSelection === "scissors") {
-            return alert(
-              `You WIN - ${playerSelection} beats ${compSelection}!`
-            );
-            playerWin();
-          } else {
-            compWin();
+        compMove = compChoice();
+        playerMove = this.id;
+
+        document.getElementById("player-move").textContent = `${playerMove}`;
+        document.getElementById("comp-move").textContent = `${compMove}`;
+
+        if (playerMove === "rock") {
+          switch (compMove) {
+            case "scissors":
+              playerWin();
+              break;
+            case "paper":
+              compWin();
+              break;
+            case "rock":
+              tie();
+          }
+        } else if (playerMove === "paper") {
+          switch (compMove) {
+            case "rock":
+              playerWin();
+              break;
+            case "scissors":
+              compWin();
+              break;
+            case "rock":
+              tie();
+          }
+        } else if (playerMove === "scissors") {
+          switch (compMove) {
+            case "paper":
+              playerWin();
+              break;
+            case "rock":
+              compWin();
+              break;
+            case "scissors":
+              tie();
           }
         }
-        //Paper
-        if (playerSelection === "paper") {
-          if (compSelection === "rock") {
-            playerWin();
-          } else {
-            compWin();
-          }
-        }
-        //Scissors
-        if (playerSelection === "scissors") {
-          if (compSelection === "paper") {
-            playerWin();
-          } else {
-            compWin();
-          }
-        }
+
+        // //Rock
+        // if (playerMove === "rock") {
+        //   if (compMove === "scissors") {
+        //     // console.log(`You WIN - ${playerMove} beats ${compMove}!`);
+        //     playerWin();
+        //   } else {
+        //     compWin();
+        //   }
+        // }
+        // //Paper
+        // if (playerMove === "paper") {
+        //   if (compMove === "rock") {
+        //     playerWin();
+        //   } else {
+        //     compWin();
+        //   }
+        // }
+        // //Scissors
+        // if (playerMove === "scissors") {
+        //   if (compMove === "paper") {
+        //     playerWin();
+        //   } else {
+        //     compWin();
+        //   }
+        // }
+
         function compWin() {
           compScore += 1;
-          console.log("Maybe next time...");
-          return alert(
-            `Better luck next time... ${compSelection} beats ${playerSelection}!`
-          );
+          if (compScore === 5) {
+            document.getElementById("result").textContent =
+              "The computer has 5 points- you lose the game.";
+          } else {
+            document.getElementById("result").textContent =
+              "Better luck next time...";
+          }
+          // console.log("Maybe next time...");
+          // console.log(
+          //   `Better luck next time... ${compMove} beats ${playerMove}!`
+          // );
         }
         function playerWin() {
           playerScore += 1;
-          console.log("Winner!");
-          return alert(`You WIN - ${playerSelection} beats ${compSelection}!`);
+          if (playerScore === 5) {
+            document.getElementById("result").textContent =
+              "That's 5 points- you win the game!";
+          } else {
+            document.getElementById("result").textContent = "Winner!";
+          }
+
+          // console.log("Winner!");
+          // console.log(`You WIN - ${playerMove} beats ${compMove}!`);
         }
+        //Tie
+        function tie() {
+          document.getElementById("result").textContent =
+            "It's a tie! The scores remain...";
+          // console.log("It's a tie! The scores remain...");
+        }
+        document.getElementById("player-score").textContent = `${playerScore}`;
+        document.getElementById("comp-score").textContent = `${compScore}`;
       }
 
       function game() {
-        //plays 5 games in a row and tallies score//
-        for (let i = 0; i < 5; i++) {
-          playRound();
-          console.log(`Computer Score: ${compScore}`);
-          console.log(`Your Score: ${playerScore}`);
-        }
-        console.log(
-          `||FINAL SCORE||
-YOU: ${playerScore}
-COMPUTER: ${compScore}`
-        );
+        playRound();
+        console.log(`Computer Score: ${compScore}`);
+        console.log(`Your Score: ${playerScore}`);
       }
     </script>
   </body>
